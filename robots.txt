@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+Disallow: /dashboard.html
+Disallow: /listings.html
+Disallow: /reputation.html
+Disallow: /requests.html
+Disallow: /reports.html
+Disallow: /review-detail.html
+Disallow: /app.js
+
+Sitemap: https://sin-yolanda.com/sitemap.xml
