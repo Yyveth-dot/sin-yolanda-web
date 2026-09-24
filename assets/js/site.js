@@ -45,14 +45,22 @@
           <a href="el-paso.html">El Paso</a>
         </div>
         <div>
-          <strong>Sucursales</strong>
-          <a href="san-ignacio.html">San Ignacio · Zapopan</a>
-          <a href="san-antonio.html">San Antonio</a>
-          <a href="houston.html">Houston</a>
+          <strong>Sucursales abiertas</strong>
+          <a href="san-ignacio.html">San Ignacio · Av. San Ignacio 78, Zapopan, Jal.</a>
+          <a href="maricarmen.html">Maricarmen · Av. Rubén Darío 1045-A, Zapopan, Jal.</a>
+          <a href="san-antonio.html">San Antonio · 415 E Commerce St, TX</a>
+          <a href="the-woodlands.html">The Woodlands · 1400 Research Forest Dr, Shenandoah, TX</a>
+          <a href="houston.html">Houston · 4901 Washington Ave, TX</a>
+        </div>
+        <div>
+          <strong>Próximamente</strong>
+          <span>El Paso · 340 Vin Rambla Dr, TX</span>
+          <span>Moreno Valley, CA</span>
+          <span>San Diego, CA</span>
         </div>
         <div>
           <strong>Reservaciones</strong>
-          <p>Canal oficial por sucursal: OpenTable en Texas y WhatsApp en Guadalajara.</p>
+          <p>OpenTable en Texas · WhatsApp en Guadalajara.</p>
         </div>
       </footer>`;
   }
@@ -124,8 +132,9 @@
           <span>${branch.concept}</span>
           <div class="card-actions">
             ${isSoon
-              ? `<a class="button button-primary" href="https://www.instagram.com/sinyolandaelpaso/" target="_blank" rel="noopener">Seguir la apertura</a>
-                 <button class="button button-ghost" type="button" data-open-modal="news">Recibir novedades</button>`
+              ? `${branch.socialUrl
+                  ? `<a class="button button-primary" href="${branch.socialUrl}" target="_blank" rel="noopener">Seguir la apertura</a>`
+                  : ""}<button class="button ${branch.socialUrl ? "button-ghost" : "button-primary"}" type="button" data-open-modal="news">Recibir novedades</button>`
               : `<a class="button button-primary" href="${branch.reserveChannel === "opentable" ? branch.reserveUrl : `https://wa.me/${branch.whatsapp}`}" target="_blank" rel="noopener">Reservar</a>
                  <a class="button button-ghost" href="${branch.page}">Ver sucursal</a>
                  <a class="text-button" href="${branch.mapsUrl}" target="_blank" rel="noopener">Cómo llegar</a>`}
@@ -143,7 +152,7 @@
           <div class="hero-overlay"></div>
           <div class="hero-copy">
             <p class="eyebrow">México · Estados Unidos</p>
-            <h1>Una experiencia.<br /><span class="hero-sans">Seis destinos.</span></h1>
+            <h1>Una experiencia.<br /><span class="hero-sans">Ocho destinos.</span></h1>
             <p>Descubre Sin Yolanda en México y Estados Unidos. Cada ubicación conserva la esencia de la marca con una experiencia propia.</p>
             <div class="hero-actions">
               <a class="button button-primary" href="locations.html">Explorar ubicaciones</a>
@@ -203,7 +212,7 @@
         <section class="page-hero compact-hero">
           <img src="assets/media/dining.webp" alt="Interior de Sin Yolanda" />
           <div class="hero-overlay"></div>
-          <div><p class="eyebrow">Presencia multisucursal</p><h1>Seis formas de vivir Sin Yolanda.</h1><p>México y Estados Unidos conectados bajo una estructura clara, local y escalable.</p></div>
+          <div><p class="eyebrow">Presencia multisucursal</p><h1>Ocho formas de vivir Sin Yolanda.</h1><p>México y Estados Unidos conectados bajo una estructura clara, local y escalable.</p></div>
         </section>
         <section class="section">
           <div class="filter-row" aria-label="Filtrar ubicaciones">
@@ -746,7 +755,7 @@
   }
 
   function cateringPage() {
-    const waGdl = `https://wa.me/523310186159?text=${encodeURIComponent("Hola, quiero cotizar catering de Sin Yolanda para mi evento.")}`;
+    const cateringContact = "tel:+17262396779";
     const piezas = [
       ["La Cocina", "Taquiza, cortes, mariscos y botanas. Cocinado en sitio."],
       ["La Barra", "Barra móvil, cantineros, tequila y mezcal, cócteles de la casa."],
@@ -754,11 +763,12 @@
     ];
     const eventosList = ["Bodas", "Quinceañeras", "Graduaciones", "Corporativos", "Cumpleaños", "Fiestas en casa"];
     const cobertura = [
-      ["Guadalajara", "Jardines de San Ignacio, Zapopan"],
       ["Houston", "Washington Ave"],
       ["The Woodlands", "Shenandoah"],
       ["San Antonio", "River Walk"],
-      ["El Paso", "Próxima parada"],
+      ["El Paso", "Ya disponible"],
+      ["Moreno Valley", "Próximamente"],
+      ["San Diego", "Próximamente"],
     ];
     return `
       ${publicHeader()}
@@ -767,11 +777,11 @@
           <img src="assets/media/celebration.webp" alt="Catering Sin Yolanda montado en una fiesta" />
           <div class="hero-overlay"></div>
           <div class="hero-copy">
-            <p class="eyebrow">SIN YOLANDA® CATERING</p>
+            <p class="eyebrow">SIN YOLANDA® CATERING · ESTADOS UNIDOS</p>
             <h1>Llevamos el micrófono a tu fiesta</h1>
-            <p>Cocina, barra y karaoke. La cantina completa, montada donde tú digas.</p>
+            <p>Cocina, barra y karaoke en Texas y California. La cantina completa, montada donde tú digas.</p>
             <div class="hero-actions">
-              <a class="button button-primary" href="${waGdl}" target="_blank" rel="noopener">Arma tu fiesta</a>
+              <a class="button button-primary" href="${cateringContact}">Arma tu fiesta</a>
               <a class="button button-ghost-light" href="locations.html">Ver ubicaciones</a>
             </div>
           </div>
@@ -787,15 +797,15 @@
             <ol class="steps-list"><li>Nos cuentas tu fiesta</li><li>Te cotizamos</li><li>Afinamos el menú</li><li>Llegamos y armamos</li><li>Tu gente canta</li></ol>
           </div>
           <div>
-            <p class="eyebrow">Cobertura</p><h2 class="reveal">Salimos a carretera.</h2>
+            <p class="eyebrow">Cobertura · Estados Unidos</p><h2 class="reveal">Salimos a carretera.</h2>
             <dl>${cobertura.map(([ciudad, detalle]) => `<div><dt>${ciudad}</dt><dd>${detalle}</dd></div>`).join("")}</dl>
             <p class="data-caveat">¿Tu ciudad no aparece? Escríbenos.</p>
-            <a class="button button-primary" href="${waGdl}" target="_blank" rel="noopener">Cotizar por WhatsApp</a>
+            <a class="button button-primary" href="${cateringContact}" target="_blank" rel="noopener">Llamar al catering</a>
           </div>
         </section>
         <section class="reserve-cta">
           <div><p class="eyebrow">Aquí no se llora</p><h2 class="reveal">Ni en tu fiesta.</h2></div>
-          <div><a class="button button-light" href="${waGdl}" target="_blank" rel="noopener">Arma tu fiesta</a></div>
+          <div><a class="button button-light" href="${cateringContact}" target="_blank" rel="noopener">Arma tu fiesta</a></div>
         </section>
       </main>
       ${publicFooter()}
