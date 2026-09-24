@@ -25,6 +25,7 @@
           <a href="catering.html">Catering</a>
           <a href="locations.html">Ubicaciones</a>
           <a href="eventos.html">Eventos</a>
+          <a class="nav-panel" href="dashboard.html" rel="nofollow">Panel</a>
         </nav>
       </header>`;
   }
@@ -61,6 +62,7 @@
         <div>
           <strong>Reservaciones</strong>
           <p>OpenTable en Texas · WhatsApp en Guadalajara.</p>
+          <a class="footer-hub" href="dashboard.html" rel="nofollow">Digital Hub · Panel interno</a>
         </div>
       </footer>`;
   }
