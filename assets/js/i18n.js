@@ -210,7 +210,13 @@
     "El micrófono recorre las mesas y la cantina entera se vuelve coro. Disponibilidad sujeta a cada sucursal.": "The mic travels the tables and the whole cantina becomes a choir. Subject to availability per location.",
     "Reservación para grupos": "Group reservations",
     "Cumpleaños, aniversarios y quince años con menú y mesa reservada. Coordina con la sucursal.": "Birthdays, anniversaries, and quinceañeras with a set menu and reserved table. Coordinate with the location.",
-    "Déjanos tu correo y te avisamos cuando abramos en El Paso. Mientras tanto, sigue @sinyolandaelpaso en Instagram.": "Leave your email and we'll tell you when El Paso opens. Meanwhile, follow @sinyolandaelpaso on Instagram."
+    "Déjanos tu correo y te avisamos cuando abramos en El Paso. Mientras tanto, sigue @sinyolandaelpaso en Instagram.": "Leave your email and we'll tell you when El Paso opens. Meanwhile, follow @sinyolandaelpaso on Instagram.",
+    "Elige ubicación.": "Pick a location.",
+    "Nosotros hacemos el resto.": "We handle the rest.",
+    "Celebraciones": "Celebrations",
+    "Brunch de domingo": "Sunday brunch",
+    "Aviso de privacidad": "Privacy notice",
+    "Una noche que se recuerda.": "A night you remember."
   };
 
   const WORD_SWAP = [
@@ -252,6 +258,19 @@
           delete n._syEs;
         }
       });
+    });
+
+    document.querySelectorAll("[aria-label]").forEach((el) => {
+      const a = el.getAttribute("aria-label");
+      if (!a) return;
+      if (lang === "en") {
+        if (el._syA === undefined) el._syA = a;
+        const rep = DICT[norm(a)] || wordSwap(a);
+        if (rep && rep !== a) el.setAttribute("aria-label", rep);
+      } else if (el._syA !== undefined) {
+        el.setAttribute("aria-label", el._syA);
+        delete el._syA;
+      }
     });
 
     document.querySelectorAll("[data-lang-btn]").forEach((b) => {
