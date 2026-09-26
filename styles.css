@@ -131,7 +131,7 @@ p {
   top: 0;
   z-index: 50;
   display: grid;
-  grid-template-columns: 210px 1fr;
+  grid-template-columns: 248px 1fr;
   align-items: center;
   min-height: 76px;
   padding: 0 clamp(1.2rem, 4vw, 4rem);
@@ -143,10 +143,16 @@ p {
 .brand img,
 .sidebar-brand img,
 .public-footer img {
-  width: 174px;
-  height: 48px;
+  width: 228px;
+  height: 66px;
   object-fit: contain;
   object-position: left center;
+  filter: drop-shadow(0 0 14px rgba(217, 122, 61, 0.22));
+  transition: filter 0.3s ease, transform 0.3s ease;
+}
+.brand:hover img {
+  filter: drop-shadow(0 0 20px rgba(217, 122, 61, 0.4));
+  transform: scale(1.02);
 }
 
 .public-nav {
@@ -2718,4 +2724,8 @@ a.row-link {
   background: var(--gold, #d9a441);
   color: var(--ink, #0a0807);
   opacity: 1;
+}
+
+@media (max-width: 720px) {
+  .brand img, .public-footer img { width: 170px; height: 50px; }
 }
