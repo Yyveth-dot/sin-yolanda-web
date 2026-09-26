@@ -2817,3 +2817,10 @@ a.row-link {
   font-weight: 700;
 }
 .nav-cta:hover { filter: brightness(1.08); }
+
+.reserve-cta .eyebrow {
+  color: rgba(10, 8, 7, 0.75);
+}
+.reserve-cta h2 {
+  color: var(--ink);
+}
