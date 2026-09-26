@@ -154,8 +154,8 @@
           <div class="hero-overlay"></div>
           <div class="hero-copy">
             <p class="eyebrow">México · Estados Unidos</p>
-            <h1>Una experiencia.<br /><span class="hero-sans">Ocho destinos.</span></h1>
-            <p>Descubre Sin Yolanda en México y Estados Unidos. Cada ubicación conserva la esencia de la marca con una experiencia propia.</p>
+            <h1>Aquí se canta.<br /><span class="hero-sans">Ocho destinos.</span></h1>
+            <p>Cada casa tiene su propia mesa, y todas suenan igual cuando se prende el micrófono.</p>
             <div class="hero-actions">
               <a class="button button-primary" href="locations.html">Explorar ubicaciones</a>
               <a class="button button-light" href="#reserve">Reservar</a>
@@ -181,9 +181,9 @@
         <section class="experience-section" id="experience">
           <div class="experience-photo"><img src="assets/media/karaoke.webp" alt="Noche de karaoke en Sin Yolanda" /></div>
           <div class="experience-copy">
-            <p class="eyebrow">La experiencia Sin Yolanda</p>
+            <p class="eyebrow">La casa por dentro</p>
             <h2 class="reveal">Una noche que se recuerda.</h2>
-            <p>Gastronomía, música, celebraciones, vida nocturna y hospitalidad se conectan en una experiencia de marca reconocible.</p>
+            <p>Cocina de cantina contemporánea, bar de agave y el micrófono abierto. Todo en la misma mesa.</p>
             <div class="experience-list">
               <div><strong>01</strong><span>Gastronomía mexicana contemporánea</span></div>
               <div><strong>02</strong><span>Música y participación social</span></div>
@@ -338,7 +338,7 @@
 
         <section class="menu-highlight">
           <div><img src="assets/media/cocktail.webp" alt="Coctel de Sin Yolanda" /></div>
-          <div><p class="eyebrow">Menú de muestra</p><h2 class="reveal">Sabores que acompañan la experiencia.</h2><p>Una selección breve para demostrar cómo el menú puede adaptarse por ciudad, idioma y disponibilidad.</p><div class="mini-menu"><span>Coctelería de autor</span><span>Entradas para compartir</span><span>Cocina mexicana</span><span>Brunch seleccionado</span></div><a class="button button-primary" href="${branch.menuUrl}" target="_blank" rel="noopener">Ver menú</a></div>
+          <div><p class="eyebrow">Menú de muestra</p><h2 class="reveal">Se botanea en serio.</h2><p>Una selección breve para demostrar cómo el menú puede adaptarse por ciudad, idioma y disponibilidad.</p><div class="mini-menu"><span>Coctelería de autor</span><span>Entradas para compartir</span><span>Cocina mexicana</span><span>Brunch seleccionado</span></div><a class="button button-primary" href="${branch.menuUrl}" target="_blank" rel="noopener">Ver menú</a></div>
         </section>
 
         <section class="section">
@@ -350,7 +350,7 @@
 
         <section class="section split-section">
           <div>
-            <p class="eyebrow">Reseñas destacadas</p><h2 class="reveal">Experiencias que construyen confianza.</h2>
+            <p class="eyebrow">Reseñas destacadas</p><h2 class="reveal">Reseñas reales de la banda.</h2>
             ${quoteCards(branch)}
             <div class="owner-response"><strong>Respuesta de propietario</strong><p>Gracias por compartir tu experiencia. Esperamos recibirte nuevamente muy pronto.</p></div>
           </div>
@@ -806,7 +806,7 @@
           </div>
         </section>
         <section class="reserve-cta">
-          <div><p class="eyebrow">Aquí no se llora</p><h2 class="reveal">Ni en tu fiesta.</h2></div>
+          <div><p class="eyebrow">Aquí no se llora, aquí se canta</p><h2 class="reveal">Trae el pretexto que sea. Nosotros ponemos la mesa.</h2></div>
           <div><a class="button button-light" href="${cateringContact}" target="_blank" rel="noopener">Arma tu fiesta</a></div>
         </section>
       </main>
@@ -855,7 +855,7 @@
   function eventosPage() {
     const formas = [
       ["Cumpleaños", "Mesa larga, pastel y una canción que nadie te va a dejar cantar solo."],
-      ["Despedidas", "Soltera, soltero o de trabajo. Aquí se despide cantando, no llorando."],
+      ["Despedidas", "Soltera, soltero o de trabajo. Aquí se despide cantando."],
       ["Corporativos", "Fin de año, cierre de trimestre o el equipo entero. El micrófono rompe el hielo."],
     ];
     return `
@@ -923,8 +923,8 @@
           <div class="hero-overlay"></div>
           <div class="hero-copy">
             <p class="eyebrow">El Paso, Texas</p>
-            <h1>El Chuco ya no llora</h1>
-            <p>La cantina viene en camino. El catering ya está aquí.</p>
+            <h1>El Chuco ya trae el plan</h1>
+            <p>La cantina va en camino y el catering ya está listo.</p>
             <div class="hero-actions">
               <a class="button button-primary" href="catering.html">Catering en El Paso</a>
               <a class="button button-ghost-light" href="https://www.instagram.com/sinyolandaelpaso/" target="_blank" rel="noopener">Avísame cuando abra</a>

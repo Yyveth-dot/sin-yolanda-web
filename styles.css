@@ -2689,3 +2689,33 @@ a.row-link {
 .footer-hub:hover {
   color: var(--cream);
 }
+
+/* ===== Toggle de idioma EN/ES ===== */
+.lang-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: 0.9rem;
+  padding: 3px;
+  border: 1px solid var(--line, rgba(255,255,255,0.18));
+  border-radius: 999px;
+  background: rgba(255,255,255,0.04);
+}
+.lang-toggle button {
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  padding: 0.32rem 0.7rem;
+  border-radius: 999px;
+  cursor: pointer;
+  opacity: 0.65;
+}
+.lang-toggle button.active {
+  background: var(--gold, #d9a441);
+  color: var(--ink, #0a0807);
+  opacity: 1;
+}
