@@ -330,7 +330,7 @@ p {
 
 .hero-index strong {
   color: var(--orange);
-  font: 500 2.6rem/1 Georgia, serif;
+  font: 500 2.6rem/1 "Syne", "Inter", sans-serif;
 }
 
 .hero-index span {
@@ -456,7 +456,7 @@ p {
 
 .location-card-body h3 {
   margin-bottom: 0.55rem;
-  font: 500 1.75rem/1.05 Georgia, serif;
+  font: 500 1.75rem/1.05 "Syne", "Inter", sans-serif;
 }
 
 .location-card-body > span {
@@ -806,7 +806,7 @@ p {
 
 .channel-mark {
   color: #c94455;
-  font: 700 1.45rem/1 Georgia, serif;
+  font: 700 1.45rem/1 "Syne", "Inter", sans-serif;
   letter-spacing: -0.03em;
 }
 
@@ -970,7 +970,7 @@ p {
   margin: 0.8rem 0;
   font-family: "Syne", "Inter", sans-serif;
   font-style: italic;
-  font: 500 1.4rem/1.35 Georgia, serif;
+  font: 500 1.4rem/1.35 "Syne", "Inter", sans-serif;
 }
 
 .quote-card p,
@@ -1215,7 +1215,7 @@ p {
 
 .dashboard-topbar h1 {
   margin: 0;
-  font: 500 clamp(1.7rem, 2.8vw, 2.8rem)/1 Georgia, serif;
+  font: 500 clamp(1.7rem, 2.8vw, 2.8rem)/1 "Syne", "Inter", sans-serif;
   letter-spacing: -0.03em;
 }
 
@@ -1329,7 +1329,7 @@ p {
 .kpi-card > strong {
   align-self: end;
   color: var(--cream);
-  font: 500 clamp(1.8rem, 3vw, 2.8rem)/1 Georgia, serif;
+  font: 500 clamp(1.8rem, 3vw, 2.8rem)/1 "Syne", "Inter", sans-serif;
 }
 
 .kpi-card small {
@@ -1375,7 +1375,7 @@ p {
 .panel-heading h2,
 .case-timeline h2 {
   margin-bottom: 0;
-  font: 500 clamp(1.5rem, 2.3vw, 2.3rem)/1.05 Georgia, serif;
+  font: 500 clamp(1.5rem, 2.3vw, 2.3rem)/1.05 "Syne", "Inter", sans-serif;
   letter-spacing: -0.03em;
 }
 
@@ -1806,7 +1806,7 @@ a.row-link {
 .recognition-grid strong {
   display: block;
   color: var(--orange);
-  font: 500 2.4rem/1 Georgia, serif;
+  font: 500 2.4rem/1 "Syne", "Inter", sans-serif;
 }
 
 .recognition-grid span {
@@ -1854,7 +1854,7 @@ a.row-link {
 
 .review-full blockquote {
   margin: 1.2rem 0;
-  font: 500 1.6rem/1.35 Georgia, serif;
+  font: 500 1.6rem/1.35 "Syne", "Inter", sans-serif;
 }
 
 .analysis-grid {
@@ -2125,7 +2125,7 @@ a.row-link {
 
 .summary-score strong {
   color: var(--orange);
-  font: 500 5rem/1 Georgia, serif;
+  font: 500 5rem/1 "Syne", "Inter", sans-serif;
 }
 
 .region-compare {
@@ -2137,7 +2137,7 @@ a.row-link {
 .region-compare strong {
   display: block;
   margin: 0.7rem 0;
-  font: 500 2.5rem/1 Georgia, serif;
+  font: 500 2.5rem/1 "Syne", "Inter", sans-serif;
 }
 
 .region-compare .progress {
@@ -2195,7 +2195,7 @@ a.row-link {
 .branch-report-grid article > strong {
   display: block;
   margin: 0.5rem 0;
-  font: 500 2rem/1 Georgia, serif;
+  font: 500 2rem/1 "Syne", "Inter", sans-serif;
 }
 
 .branch-report-grid .progress {
