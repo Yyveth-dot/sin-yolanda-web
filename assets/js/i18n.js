@@ -251,6 +251,10 @@
     "Dirección": "Address",
     "Horarios": "Hours",
     "Teléfono": "Phone",
+    "Teléfono:": "Phone:",
+    "Dirección:": "Address:",
+    "Horarios:": "Hours:",
+    "Reseña de Google · julio 2026": "Google review · July 2026",
     "Estacionamiento": "Parking",
     "Accesibilidad": "Accessibility",
     "Reservaciones": "Reservations",
@@ -324,7 +328,7 @@
     [/\bJalisco\b/g, "Jalisco"],
   ];
   const LANG_KEY = "sy-lang";
-  const TRANSLATABLE_SELECTOR = "h1, h2, h3, h4, h5, h6, p, a, span, strong, em, li, blockquote, dt, dd, option, button:not([aria-label]), label, figcaption";
+  const TRANSLATABLE_SELECTOR = "h1, h2, h3, h4, h5, h6, p, a, span, strong, em, li, blockquote, dt, dd, option, button:not([aria-label]), label, figcaption, summary";
 
   let current = "es";
 
