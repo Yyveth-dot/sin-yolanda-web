@@ -254,6 +254,7 @@
     "Teléfono:": "Phone:",
     "Canal oficial de reservación": "The official booking channel",
     "Canal oficial de la sucursal": "The location's official channel",
+    "El boletín por correo se activará con la conexión del sistema.": "The email newsletter will switch on once the system is connected.",
     "Dirección:": "Address:",
     "Horarios:": "Hours:",
     "Reseña de Google · julio 2026": "Google review · July 2026",
@@ -330,7 +331,7 @@
     [/\bJalisco\b/g, "Jalisco"],
   ];
   const LANG_KEY = "sy-lang";
-  const TRANSLATABLE_SELECTOR = "h1, h2, h3, h4, h5, h6, p, a, span, strong, em, li, blockquote, dt, dd, option, button:not([aria-label]), label, figcaption, summary";
+  const TRANSLATABLE_SELECTOR = "h1, h2, h3, h4, h5, h6, p, a, span, strong, em, li, blockquote, dt, dd, option, small, button:not([aria-label]), label, figcaption, summary";
 
   let current = "es";
 
