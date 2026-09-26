@@ -13,18 +13,18 @@
 
   function publicHeader() {
     return `
-      <div class="demo-bar">SIN YOLANDA® · Cantinas con micrófono abierto · Guadalajara y Texas</div>
+      <div class="demo-bar">SIN YOLANDA® · Cantina contemporánea · Guadalajara y Texas</div>
       <header class="public-header">
         <a class="brand" href="index.html" aria-label="Sin Yolanda, inicio">
           <img src="assets/media/brand-logo-gdl.png" alt="Sin Yolanda" />
         </a>
         <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="public-nav">Menú</button>
         <nav id="public-nav" class="public-nav" aria-label="Navegación principal">
-          <a href="index.html">Inicio</a>
-          <a href="la-cantina.html">La Cantina</a>
-          <a href="catering.html">Catering</a>
           <a href="locations.html">Ubicaciones</a>
           <a href="eventos.html">Eventos</a>
+          <a href="la-cantina.html">La Cantina</a>
+          <a href="index.html#cumple">Cumpleaños</a>
+          <a class="nav-cta" href="locations.html">Reservar mesa</a>
           <a class="nav-panel" href="dashboard.html" rel="nofollow">Panel</a>
         </nav>
       </header>`;
@@ -147,30 +147,96 @@
   }
 
   function homePage() {
+    const waGdl = `https://wa.me/523310186159?text=${encodeURIComponent("Hola, quiero reservar una mesa en Sin Yolanda San Ignacio.")}`;
+    const heroImg = data.branches[0].image || "assets/media/hero-night.webp";
+    const plan = [
+      ["Comida", "assets/media/dining.webp", "Para el centro de la mesa. Se comparte o no se pide."],
+      ["Tragos", "assets/media/cocktail.webp", "Coquetos. Sin lista de precios: pregunta y te contamos."],
+      ["Música", "assets/media/karaoke.webp", "Canciones que te sabes completas."],
+      ["Micrófono", "assets/media/celebration.webp", "Pasa por las mesas. Nadie se lo niega a nadie."],
+      ["La banda", "assets/media/interior.webp", "Trae a los cuatro. Aquí caben todos."],
+      ["Celebraciones", "assets/media/hospitality.webp", "Cumpleaños, renuncias, quincenas. Cualquier pretexto."],
+    ];
+    const pretextos = [
+      ["Cumpleaños", "Aquí se entera todo el lugar."],
+      ["Quincena", "Cayó. Eso cuenta."],
+      ["Renuncia", "Mañana vemos qué sigue. Hoy se arma."],
+      ["Divorcio", "¿Ya firmaste? Pues eso se festeja."],
+      ["Viernes", "¿Neta necesitas más pretexto?"],
+      ["Porque sí", "El mejor de todos."],
+    ];
+    const abiertas = data.branches.filter((b) => b.status === "active");
+    const proximas = data.branches.filter((b) => b.status === "coming-soon");
     return `
       ${publicHeader()}
       <main>
         <section class="home-hero">
-          <img src="assets/media/hero-night.webp" alt="Celebración en Sin Yolanda" />
+          <img src="${heroImg}" alt="Noche en Sin Yolanda" />
           <div class="hero-overlay"></div>
           <div class="hero-copy">
             <p class="eyebrow">México · Estados Unidos</p>
-            <h1>Aquí se canta.<br /><span class="hero-sans">Ocho destinos.</span></h1>
-            <p>Cada casa tiene su propia mesa, y todas suenan igual cuando se prende el micrófono.</p>
+            <h1>Ya quedó. Aquí se festeja.</h1>
+            <p>Cantina contemporánea, comida que sí llena, tragos coquetos y canciones que te sabes completas.</p>
             <div class="hero-actions">
-              <a class="button button-primary" href="locations.html">Explorar ubicaciones</a>
-              <a class="button button-light" href="#reserve">Reservar</a>
+              <a class="button button-primary" href="#ubicaciones">Reservar mesa</a>
+              <a class="button button-ghost-light" href="#plan">Ver el plan</a>
             </div>
           </div>
-          <div class="hero-index"><strong>05</strong><span>sucursales abiertas</span><strong>01</strong><span>próxima apertura</span></div>
+          <div class="hero-index"><strong>0${abiertas.length}</strong><span>sucursales abiertas</span><strong>0${proximas.length}</strong><span>próximas aperturas</span></div>
         </section>
 
-        <section class="section location-showcase">
-          <div class="section-heading">
-            <div><p class="eyebrow">Una marca, presencia local</p><h2 class="reveal">Elige tu próxima noche.</h2></div>
-            <p>Cada página organiza información, reservaciones y descubrimiento local sin perder la identidad de la marca.</p>
+        <section class="section" id="plan">
+          <div class="section-heading"><div><p class="eyebrow">El plan</p><h2 class="reveal">El plan ya está armado.</h2></div><p>Tú solo trae el pretexto.</p></div>
+          <div class="event-grid">
+            ${plan.map(([titulo, img, texto], i) => `<article class="reveal-scale" style="animation-delay:${0.08 * i}s"><img src="${img}" alt="${titulo}" loading="lazy" width="640" height="420" /><h3>${titulo}</h3><p>${texto}</p></article>`).join("")}
           </div>
-          <div class="filter-row" aria-label="Filtrar ubicaciones">
+        </section>
+
+        <section class="section pretextos-section">
+          <div class="section-heading"><div><p class="eyebrow">Los pretextos</p><h2 class="reveal">Se aceptan pretextos chiquitos.</h2></div></div>
+          <div class="pretextos-grid">
+            ${pretextos.map(([nombre, remate], i) => `<button class="pretexto-card reveal-scale" type="button" style="animation-delay:${0.08 * i}s" data-open-modal="news"><span>0${i + 1}</span><strong>${nombre}</strong><em>“${remate}”</em><small>Cuéntanos y apartamos mesa</small></button>`).join("")}
+          </div>
+        </section>
+
+        <section class="section cartelera-section" id="cartelera">
+          <div class="section-heading"><div><p class="eyebrow">Cartelera</p><h2 class="reveal">Esta semana se puso bueno.</h2></div><p>Los eventos de cada casa, aquí apenas se están armando.</p></div>
+          <div class="event-grid">${data.events.map((event) => `<article><span>${event.date}</span><h3>${event.title}</h3><p>${event.description}</p><a class="text-button" href="#ubicaciones">Reservar evento</a></article>`).join("")}</div>
+          <p class="data-caveat">TODO: CONFIRMAR CON OPERACIÓN — cartelera con eventos reales por sucursal.</p>
+        </section>
+
+        <section class="experience-section" id="experiencia">
+          <div class="experience-media"><img src="assets/media/celebration.webp" alt="Amigos cantando en Sin Yolanda" loading="lazy" width="640" height="420" /></div>
+          <div class="experience-copy">
+            <p class="eyebrow">La casa por dentro</p>
+            <h2 class="reveal">Trae a los cuatro.</h2>
+            <p>Mesas largas, brinde completo y el micrófono que no se le niega a nadie. Aquí no hay mesa reservada para influencers: la mejor foto la hace tu gente.</p>
+            <div class="mini-menu"><span>Gastronomía mexicana contemporánea</span><span>Música y participación social</span><span>Celebraciones con intención</span><span>Hospitalidad local, visión corporativa</span></div>
+          </div>
+        </section>
+
+        <section class="section botana-section" id="botaneo">
+          <div class="section-heading"><div><p class="eyebrow">Comida + tragos</p><h2 class="reveal">Aquí se botanea en serio.</h2></div><p>Tragos coquetos y comida que sí llena.</p></div>
+          <div class="event-grid">
+            <article><h3>Para botanear</h3><p>Guacamole con chicharrón, queso fundido y quesabirria con consomé. El centro de la mesa se comparte.</p></article>
+            <article><h3>Para echarse una</h3><p>Paloma de la casa, carajillo y más de 30 marcas de agave. Pregunta: aquí te contamos.</p></article>
+            <article><h3>Para cantar</h3><p>El micrófono pasa por las mesas. La canción la eliges tú y el coro lo pone el lugar.</p></article>
+          </div>
+          <a class="button button-primary" href="la-cantina.html">Ver la carta</a>
+        </section>
+
+        <section class="section cumple-section" id="cumple">
+          <div class="section-heading"><div><p class="eyebrow">Celebraciones</p><h2 class="reveal">¿Cumpleaños?</h2></div></div>
+          <p class="cumple-copy">Aquí se entera todo el lugar. Avísanos y ya sabemos qué hacer: mesa larga, pastel y una canción que nadie te va a dejar cantar solo.</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="${waGdl}" target="_blank" rel="noopener">Armar mi cumpleaños</a>
+            <a class="button button-ghost" href="locations.html">Ver sucursales</a>
+          </div>
+        </section>
+
+        <section class="section location-showcase" id="ubicaciones">
+          <div class="section-heading"><div><p class="eyebrow">Ubicaciones</p><h2 class="reveal">¿Cuál te queda?</h2></div></div>
+          <div class="filter-chips" role="group" aria-label="Filtrar ubicaciones">
             <button class="filter active" type="button" data-filter="all">Todas</button>
             <button class="filter" type="button" data-filter="mx">México</button>
             <button class="filter" type="button" data-filter="us">Estados Unidos</button>
@@ -179,34 +245,15 @@
           <div class="location-grid">${data.branches.map(locationCard).join("")}</div>
         </section>
 
-        <section class="experience-section" id="experience">
-          <div class="experience-photo"><img src="assets/media/karaoke.webp" alt="Noche de karaoke en Sin Yolanda" /></div>
-          <div class="experience-copy">
-            <p class="eyebrow">La casa por dentro</p>
-            <h2 class="reveal">Una noche que se recuerda.</h2>
-            <p>Cocina de cantina contemporánea, bar de agave y el micrófono abierto. Todo en la misma mesa.</p>
-            <div class="experience-list">
-              <div><strong>01</strong><span>Gastronomía mexicana contemporánea</span></div>
-              <div><strong>02</strong><span>Música y participación social</span></div>
-              <div><strong>03</strong><span>Celebraciones con intención</span></div>
-              <div><strong>04</strong><span>Hospitalidad local, visión corporativa</span></div>
-            </div>
-          </div>
-        </section>
-
-        <section class="section events-preview" id="events">
-          <div class="section-heading"><div><p class="eyebrow">Agenda</p><h2 class="reveal">Momentos para compartir.</h2></div><p>Cada sucursal administra su agenda; confirma disponibilidad al reservar.</p></div>
-          <div class="event-grid">${data.events.map((event) => `<article><span>${event.date}</span><h3>${event.title}</h3><p>${event.description}</p><a class="text-button" href="locations.html">Reservar evento</a></article>`).join("")}</div>
-        </section>
-
         <section class="reserve-cta" id="reserve">
-          <div><p class="eyebrow">Tu próxima historia comienza aquí</p><h2 class="reveal">Elige ubicación.<br />Nosotros hacemos el resto.</h2></div>
-          <div><p>Reserva por el canal oficial de tu sucursal: OpenTable en Texas y WhatsApp en Guadalajara.</p><a class="button button-light" href="locations.html">Elegir ubicación</a></div>
+          <div><p class="eyebrow">¿Sin Yolanda? Si sabes, sabes.</p><h2 class="reveal">Ya quedó.</h2></div>
+          <div><a class="button button-light" href="#ubicaciones">Reservar mesa</a></div>
         </section>
       </main>
       ${publicFooter()}
       ${modalMarkup()}`;
   }
+
 
   function locationsPage() {
     return `
