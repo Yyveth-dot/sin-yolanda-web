@@ -218,6 +218,7 @@
     "Aviso de privacidad": "Privacy notice",
     "Una noche que se recuerda.": "A night you remember.",
     "El Micrófono": "The Mic",
+    "El micrófono": "The Mic",
     "Sonido, karaoke y un anfitrión que hace cantar a tu gente.": "Sound, karaoke, and a host who gets your people singing.",
     "Estamos por abrir en El Paso.": "We're about to open in El Paso.",
     "Sin Yolanda es una cantina de micrófono abierto nacida en Guadalajara: tequila, canciones que todos se saben y noches que se recuerdan. La próxima mesa larga será en 340 Vin Rambla Dr.": "Sin Yolanda is an open-mic cantina born in Guadalajara: tequila, songs everyone knows, and nights worth remembering. The next long table lands at 340 Vin Rambla Dr.",
