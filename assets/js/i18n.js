@@ -194,9 +194,30 @@
     "Cerrado": "Closed",
     "Abierto": "Open",
     "Habitual": "Regular",
-    "Novedoso": "New"
+    "Novedoso": "New",
+    "Cada página organiza información, reservaciones y descubrimiento local sin perder la identidad de la marca.": "Each page organizes information, reservations, and local discovery without losing the brand identity.",
+    "Cada casa tiene su propia mesa, y todas suenan igual cuando se prende el micrófono.": "Every house has its own table, and they all sound the same once the mic goes up.",
+    "Tu próxima historia comienza aquí": "Your next story starts here",
+    "Elige ubicación.Nosotros hacemos el resto.": "Pick a location. We handle the rest.",
+    "sucursales abiertas": "open locations",
+    "próxima apertura": "next opening",
+    "Menú": "Menu",
+    "México · Estados Unidos": "Mexico · United States",
+    "Cantina · Karaoke · Coctelería": "Cantina · Karaoke · Cocktails",
+    "Mexican restaurant · En preparación": "Mexican restaurant · In the works",
+    "Noche de canto": "Sing night",
+    "Jue–Sáb · desde las 8:00 pm": "Thu–Sat · from 8:00 pm",
+    "El micrófono recorre las mesas y la cantina entera se vuelve coro. Disponibilidad sujeta a cada sucursal.": "The mic travels the tables and the whole cantina becomes a choir. Subject to availability per location.",
+    "Reservación para grupos": "Group reservations",
+    "Cumpleaños, aniversarios y quince años con menú y mesa reservada. Coordina con la sucursal.": "Birthdays, anniversaries, and quinceañeras with a set menu and reserved table. Coordinate with the location.",
+    "Déjanos tu correo y te avisamos cuando abramos en El Paso. Mientras tanto, sigue @sinyolandaelpaso en Instagram.": "Leave your email and we'll tell you when El Paso opens. Meanwhile, follow @sinyolandaelpaso on Instagram."
   };
 
+  const WORD_SWAP = [
+    [/(\bMéxico\b)/g, "Mexico"],
+    [/\bEE\.UU\.\b/g, "USA"],
+    [/\bJalisco\b/g, "Jalisco"],
+  ];
   const LANG_KEY = "sy-lang";
   const TRANSLATABLE_SELECTOR = "h1, h2, h3, h4, h5, h6, p, a, span, strong, em, li, blockquote, dt, dd, option, button:not([aria-label]), label, figcaption";
 
@@ -217,7 +238,10 @@
       const own = Array.from(node.childNodes).filter((n) => n.nodeType === 3 && norm(n.textContent)).length;
       if (!own) return;
       const original = norm(node.textContent);
-      if (lang === "en" && DICT[original]) {
+      if (lang === "en" && !DICT[original] && /[\bMéxico\b]|EE\.UU\./.test(original)) {
+        if (!node.dataset.syEs) node.dataset.syEs = original;
+        node.textContent = original.replace(/\bMéxico\b/g, "Mexico").replace(/\bEE\.UU\.\b/g, "USA");
+      } else if (lang === "en" && DICT[original]) {
         if (!node.dataset.syEs) node.dataset.syEs = original;
         node.textContent = DICT[original];
       } else if (lang === "es" && node.dataset.syEs) {
