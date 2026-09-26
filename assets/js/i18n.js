@@ -227,26 +227,31 @@
     return s.replace(/\s+/g, " ").trim();
   }
 
+  function wordSwap(s) {
+    if (!/México|EE\.UU\./.test(s)) return null;
+    return s.replace(/\bMéxico\b/g, "Mexico").replace(/\bEE\.UU\./g, "USA");
+  }
+
   function apply(lang) {
     current = lang;
     document.documentElement.lang = lang === "en" ? "en" : "es";
     try { localStorage.setItem(LANG_KEY, lang); } catch (e) {}
 
-    const nodes = document.querySelectorAll(TRANSLATABLE_SELECTOR);
-    nodes.forEach((node) => {
-      // solo hojas con texto directo (evita duplicar traducciones en contenedores)
-      const own = Array.from(node.childNodes).filter((n) => n.nodeType === 3 && norm(n.textContent)).length;
-      if (!own) return;
-      const original = norm(node.textContent);
-      if (lang === "en" && !DICT[original] && /[\bMéxico\b]|EE\.UU\./.test(original)) {
-        if (!node.dataset.syEs) node.dataset.syEs = original;
-        node.textContent = original.replace(/\bMéxico\b/g, "Mexico").replace(/\bEE\.UU\.\b/g, "USA");
-      } else if (lang === "en" && DICT[original]) {
-        if (!node.dataset.syEs) node.dataset.syEs = original;
-        node.textContent = DICT[original];
-      } else if (lang === "es" && node.dataset.syEs) {
-        node.textContent = node.dataset.syEs;
-      }
+    document.querySelectorAll(TRANSLATABLE_SELECTOR).forEach((node) => {
+      // traducir cada nodo de texto directo (funciona con <br/>, <span>, etc.)
+      Array.from(node.childNodes).forEach((n) => {
+        if (n.nodeType !== 3) return;
+        const s = norm(n.textContent);
+        if (!s || !/[a-záéíóúñ]/i.test(s)) return;
+        if (lang === "en") {
+          if (n._syEs === undefined) n._syEs = s;
+          const rep = DICT[s] || wordSwap(s);
+          if (rep && rep !== s) n.textContent = rep;
+        } else if (n._syEs !== undefined) {
+          n.textContent = n._syEs;
+          delete n._syEs;
+        }
+      });
     });
 
     document.querySelectorAll("[data-lang-btn]").forEach((b) => {
