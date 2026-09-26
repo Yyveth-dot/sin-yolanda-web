@@ -63,6 +63,7 @@
           <strong>Reservaciones</strong>
           <p>OpenTable en Texas · WhatsApp en Guadalajara.</p>
           <a class="footer-hub" href="dashboard.html" rel="nofollow">Digital Hub · Panel interno</a>
+          <a class="footer-hub" href="aviso-de-privacidad.html">Aviso de privacidad</a>
         </div>
       </footer>`;
   }
