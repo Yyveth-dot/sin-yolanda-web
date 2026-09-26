@@ -16,7 +16,7 @@
       <div class="demo-bar">SIN YOLANDA® · Cantinas con micrófono abierto · Guadalajara y Texas</div>
       <header class="public-header">
         <a class="brand" href="index.html" aria-label="Sin Yolanda, inicio">
-          <img src="assets/media/brand-logo.jpg" alt="Sin Yolanda" />
+          <img src="assets/media/brand-logo.png" alt="Sin Yolanda" />
         </a>
         <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="public-nav">Menú</button>
         <nav id="public-nav" class="public-nav" aria-label="Navegación principal">
@@ -34,7 +34,7 @@
     return `
       <footer class="public-footer">
         <div>
-          <img src="assets/media/brand-logo.jpg" alt="Sin Yolanda" />
+          <img src="assets/media/brand-logo.png" alt="Sin Yolanda" />
           <p>Una marca que vive en cada ciudad: Guadalajara y Texas.</p>
         </div>
         <div>
@@ -81,7 +81,7 @@
     return `
       <aside class="sidebar" id="dashboard-nav">
         <a class="sidebar-brand" href="index.html">
-          <img src="assets/media/brand-logo.jpg" alt="Sin Yolanda" />
+          <img src="assets/media/brand-logo.png" alt="Sin Yolanda" />
           <span>Digital Hub</span>
         </a>
         <nav aria-label="Navegación del panel">
