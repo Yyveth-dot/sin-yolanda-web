@@ -252,6 +252,8 @@
     "Horarios": "Hours",
     "Teléfono": "Phone",
     "Teléfono:": "Phone:",
+    "Canal oficial de reservación": "The official booking channel",
+    "Canal oficial de la sucursal": "The location's official channel",
     "Dirección:": "Address:",
     "Horarios:": "Hours:",
     "Reseña de Google · julio 2026": "Google review · July 2026",
@@ -341,6 +343,12 @@
     return s.replace(/\bMéxico\b/g, "Mexico").replace(/\bEE\.UU\./g, "USA");
   }
 
+  const PREFIX_SWAPS = [
+    [/^Reservar en (.+)$/, "Book at $1"],
+    [/^Reservaciones en (.+)$/, "Reservations at $1"],
+    [/^Llamar a (.+)$/, "Call $1"],
+  ];
+
   function apply(lang) {
     current = lang;
     document.documentElement.lang = lang === "en" ? "en" : "es";
@@ -354,7 +362,12 @@
         if (!s || !/[a-záéíóúñ]/i.test(s)) return;
         if (lang === "en") {
           if (n._syEs === undefined) n._syEs = s;
-          const rep = DICT[s] || wordSwap(s);
+          let rep = null;
+          for (const [re, tpl] of PREFIX_SWAPS) {
+            const m = s.match(re);
+            if (m) { rep = tpl.replace("$1", m[1]); break; }
+          }
+          if (!rep) rep = DICT[s] || wordSwap(s);
           if (rep && rep !== s) n.textContent = rep;
         } else if (n._syEs !== undefined) {
           n.textContent = n._syEs;
@@ -368,7 +381,12 @@
       if (!a) return;
       if (lang === "en") {
         if (el._syA === undefined) el._syA = a;
-        const rep = DICT[norm(a)] || wordSwap(a);
+        let rep = null;
+        for (const [re, tpl] of PREFIX_SWAPS) {
+          const m = a.match(re);
+          if (m) { rep = tpl.replace("$1", m[1]); break; }
+        }
+        if (!rep) rep = DICT[norm(a)] || wordSwap(a);
         if (rep && rep !== a) el.setAttribute("aria-label", rep);
       } else if (el._syA !== undefined) {
         el.setAttribute("aria-label", el._syA);
