@@ -148,7 +148,6 @@
 
   function homePage() {
     const waGdl = `https://wa.me/523310186159?text=${encodeURIComponent("Hola, quiero reservar una mesa en Sin Yolanda San Ignacio.")}`;
-    const heroImg = data.branches[0].image || "assets/media/hero-night.webp";
     const plan = [
       ["Comida", "assets/media/dining.webp", "Para el centro de la mesa. Se comparte o no se pide."],
       ["Tragos", "assets/media/cocktail.webp", "Coquetos. Sin lista de precios: pregunta y te contamos."],
@@ -170,22 +169,34 @@
     return `
       ${publicHeader()}
       <main>
-        <section class="home-hero">
-          <img src="${heroImg}" alt="Noche en Sin Yolanda" />
-          <div class="hero-overlay"></div>
-          <div class="hero-copy">
-            <p class="eyebrow">México · Estados Unidos</p>
-            <h1>Ya quedó. Aquí se festeja.</h1>
-            <p>Cantina contemporánea, comida que sí llena, tragos coquetos y canciones que te sabes completas.</p>
-            <div class="hero-actions">
-              <a class="button button-primary" href="#ubicaciones">Reservar mesa</a>
-              <a class="button button-ghost-light" href="#plan">Ver el plan</a>
-            </div>
+        <section class="home-hero home-hero-cinema" id="inicio">
+          <div class="hero-video-wrap" aria-hidden="true">
+            <video
+              class="hero-video"
+              autoplay
+              muted
+              loop
+              playsinline
+              preload="metadata"
+              poster="assets/media/hero-celebration-poster.webp"
+              data-hero-video>
+              <source src="assets/media/hero-celebration.mp4" type="video/mp4" />
+            </video>
           </div>
-          <div class="hero-index"><strong>0${abiertas.length}</strong><span>sucursales abiertas</span><strong>0${proximas.length}</strong><span>próximas aperturas</span></div>
+          <div class="hero-overlay hero-overlay-cinema"></div>
+          <div class="hero-copy hero-copy-cinema">
+            <p class="eyebrow hero-eyebrow">Cantina contemporánea</p>
+            <h1 class="hero-title">El plan ya está armado.</h1>
+            <p class="hero-sub">Comida que sí llena, tragos coquetos y canciones que se gritan completas.</p>
+            <div class="hero-actions">
+              <a class="button button-primary" href="#ubicaciones">Reserva tu mesa</a>
+              <a class="button button-ghost-light" href="#ubicaciones">Encuentra tu Sin Yolanda</a>
+            </div>
+            <p class="hero-micro">México · Texas</p>
+          </div>
         </section>
 
-        <section class="section" id="plan">
+        <section class="section section-after-hero" id="plan">
           <div class="section-heading"><div><p class="eyebrow">El plan</p><h2 class="reveal">El plan ya está armado.</h2></div><p>Tú solo trae el pretexto.</p></div>
           <div class="event-grid">
             ${plan.map(([titulo, img, texto], i) => `<article class="reveal-scale" style="animation-delay:${0.08 * i}s"><img src="${img}" alt="${titulo}" loading="lazy" width="640" height="420" /><h3>${titulo}</h3><p>${texto}</p></article>`).join("")}
@@ -1007,6 +1018,36 @@
       ${modalMarkup()}`;
   }
 
+  function initHeroCinema() {
+    const hero = document.querySelector(".home-hero-cinema");
+    if (!hero) return;
+    const video = hero.querySelector("[data-hero-video]");
+    const copy = hero.querySelector(".hero-copy-cinema");
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const fine = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+
+    if (reduced || !fine || !video) return;
+
+    let ticking = false;
+    const update = () => {
+      ticking = false;
+      const rect = hero.getBoundingClientRect();
+      const vh = window.innerHeight || 1;
+      const p = Math.min(Math.max(-rect.top / (rect.height - vh || 1), 0), 1);
+      video.style.transform = `translateY(${-3 * p}%) scale(${1 + 0.05 * p})`;
+      if (copy) {
+        copy.style.opacity = String(1 - p);
+        copy.style.transform = `translateY(${50 * p}px)`;
+      }
+    };
+    const onScroll = () => {
+      if (!ticking) { ticking = true; requestAnimationFrame(update); }
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    update();
+  }
+
   const renderers = {
     home: homePage,
     locations: locationsPage,
@@ -1026,6 +1067,7 @@
 
   root.innerHTML = `${(renderers[page] || homePage)()}${toastMarkup()}`;
   bindCommon();
+  initHeroCinema();
   bindLocationFilters();
   bindModal();
   bindListings();
