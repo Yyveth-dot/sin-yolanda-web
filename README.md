@@ -10,7 +10,8 @@ Sitio estático multi-página de la cadena de cantinas con micrófono abierto
 
 ## Estructura
 - 12 páginas públicas: home, locations, la-cantina, catering, eventos, tienda,
-  el-paso, y 5 sucursales (san-ignacio, maricarmen, san-antonio, the-woodlands, houston)
+  el-paso, y 4 sucursales (san-ignacio, san-antonio, the-woodlands, houston), más privacidad,
+  Houston EN y carta Houston. Maricarmen está archivada, fuera del artefacto público.
 - Panel interno (no indexado): dashboard, listings, reputation, requests, reports, review-detail
 - Datos: `assets/js/mock-data.js` (NAP verificado vs Google Business Profile 24-sep-2026)
 - SEO: JSON-LD Restaurant por sucursal (con horarios + geo reales), canonicals,
@@ -20,7 +21,9 @@ Sitio estático multi-página de la cadena de cantinas con micrófono abierto
 Pages no está conectado a Git/CI/CD todavía. No desplegar el checkout completo ni cambios dirty:
 preparar un artefacto público desde el commit remoto aprobado, sin documentación/scripts/pruebas/
 secretos; desplegar ese directorio con Wrangler al proyecto `sin-yolanda-web`, rama `main`, indicando
-hash del commit. Requiere autorización explícita y rollback; verificar dominio después de publicar.
+hash del commit. `node scripts/package-public.mjs <directorio-nuevo>` crea ese artefacto con
+allowlist; excluye `archive/`, scripts, pruebas y documentación. Requiere autorización explícita
+y rollback; verificar dominio después de publicar.
 
 ### Houston (cierre publicado 30-sep-2026)
 
@@ -61,7 +64,7 @@ continuación canónica en el plan operativo del vault, no en este artefacto.
 
 ## Reservas (canales oficiales)
 - Texas: OpenTable (perf 1484191 SA / 1503490 TW / 1524058 HOU)
-- Guadalajara: WhatsApp (San Ignacio +52 33 1018 6159 / Maricarmen +52 33 4338 5862)
+- Guadalajara: WhatsApp (San Ignacio +52 33 1018 6159)
 
 ## Pendientes externos
 1. Automatización de despliegue Git/CI/CD (diferida; no modifica este release)

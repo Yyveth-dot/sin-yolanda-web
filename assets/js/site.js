@@ -48,7 +48,6 @@
         <div>
           <strong>Sucursales abiertas</strong>
           <a href="san-ignacio.html">San Ignacio · Av. San Ignacio 78, Zapopan, Jal.</a>
-          <a href="maricarmen.html">Maricarmen · Av. Rubén Darío 1045-A, Zapopan, Jal.</a>
           <a href="san-antonio.html">San Antonio · 415 E Commerce St, TX</a>
           <a href="the-woodlands.html">The Woodlands · 1400 Research Forest Dr, Shenandoah, TX</a>
           <a href="houston.html">Houston · 4901 Washington Ave, TX</a>
