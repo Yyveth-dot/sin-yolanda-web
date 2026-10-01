@@ -76,7 +76,7 @@
     "Tu correo electrónico quedó registrado.": "Your email is on the list.",
 
     /* ---------- LOCATIONS ---------- */
-    "Ocho formas de vivir Sin Yolanda.": "Eight ways to do Sin Yolanda.",
+    "Encuentra tu Sin Yolanda.": "Find your Sin Yolanda.",
     "México y Estados Unidos conectados bajo una estructura clara, local y escalable.": "Mexico and the U.S. connected under one clear, local, scalable setup.",
     "Abiertas": "Open",
     "Con catering": "With catering",

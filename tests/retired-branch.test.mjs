@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { readFileSync, existsSync } from 'node:fs';
+import { readFileSync, existsSync, readdirSync } from 'node:fs';
 import vm from 'node:vm';
 const root = new URL('../', import.meta.url);
 test('retired branch is absent from public data, navigation, metadata and sitemap', () => {
@@ -20,4 +20,12 @@ test('retired branch is absent from public data, navigation, metadata and sitema
 test('retirement is not a destructive menu rewrite', () => {
   assert.match(readFileSync(new URL('houston/menu/index.html', root), 'utf8'), /p4-shots-sin-yolanda-maricarmen/);
   assert.match(readFileSync(new URL('houston.html', root), 'utf8'), /<iframe/);
+});
+test('every consumer requests the updated scripts rather than cached retired data', () => {
+  for (const name of readdirSync(root).filter(name => name.endsWith('.html'))) {
+    const html = readFileSync(new URL(name, root), 'utf8');
+    for (const [,source] of html.matchAll(/src="(assets\/js\/(?:mock-data|site)\.js[^\"]*)"/g)) {
+      assert.match(source, /\?v=20260930-retirement$/, name);
+    }
+  }
 });

@@ -272,7 +272,7 @@
         <section class="page-hero compact-hero">
           <img src="assets/media/dining.webp" alt="Interior de Sin Yolanda" />
           <div class="hero-overlay"></div>
-          <div><p class="eyebrow">Presencia multisucursal</p><h1>Ocho formas de vivir Sin Yolanda.</h1><p>México y Estados Unidos conectados bajo una estructura clara, local y escalable.</p></div>
+          <div><p class="eyebrow">Presencia multisucursal</p><h1>Encuentra tu Sin Yolanda.</h1><p>México y Estados Unidos conectados bajo una estructura clara, local y escalable.</p></div>
         </section>
         <section class="section">
           <div class="filter-row" aria-label="Filtrar ubicaciones">
