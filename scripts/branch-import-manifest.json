@@ -1,0 +1,11 @@
+{
+  "houston": {
+    "mapIdentity": "0x8640c19b1c06c689:0xaac06ea799d5fea1",
+    "mapName": "Sin Yolanda Houston",
+    "routes": [
+      { "from": "houston/index.html", "to": "houston.html", "lang": "es", "canonical": "https://sin-yolanda.com/houston" },
+      { "from": "en/houston/index.html", "to": "en/houston/index.html", "lang": "en", "canonical": "https://sin-yolanda.com/en/houston/" },
+      { "from": "houston/menu/index.html", "to": "houston/menu/index.html", "lang": "en", "kind": "menu", "canonical": "https://sin-yolanda.com/houston/menu/" }
+    ]
+  }
+}

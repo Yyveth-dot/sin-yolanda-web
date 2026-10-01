@@ -2,12 +2,24 @@ import assert from 'node:assert/strict';
 import { existsSync, readFileSync } from 'node:fs';
 import { test } from 'node:test';
 import vm from 'node:vm';
+import { execFileSync } from 'node:child_process';
 
 const previewUrl = 'houston.html';
 const dataSource = readFileSync(new URL('../assets/js/mock-data.js', import.meta.url), 'utf8');
 const siteSource = readFileSync(new URL('../assets/js/site.js', import.meta.url), 'utf8');
 const context = { window: {} };
 vm.runInNewContext(dataSource, context);
+const scriptContent = html => {
+  const seen = new Set();
+  const read = path => {
+    if (seen.has(path)) return '';
+    seen.add(path);
+    const url = new URL(path, new URL('../', import.meta.url));
+    const source = readFileSync(url, 'utf8');
+    return source + [...source.matchAll(/\bimport\s*["'](\.[^"']+)["']/g)].map(([,child]) => read(new URL(child, url).pathname.split('/sinyolanda-karina-official/')[1])).join('\n');
+  };
+  return [...html.matchAll(/<script\b[^>]*src="\/(_astro\/[^"]+)"/g)].map(([,path]) => read(path)).join('\n');
+};
 
 test('Houston points to its official page while other branches keep their existing links', () => {
   const branches = context.window.SY_DATA.branches;
@@ -17,6 +29,48 @@ test('Houston points to its official page while other branches keep their existi
   }
   assert.match(siteSource, /<a href="houston\.html">Houston/);
   assert.doesNotMatch(siteSource, /demo-sin-yolanda\.despertartdigital\.cloud\/houston/);
+});
+
+test('Houston candidate has current source menu, shared facts, privacy and reciprocal languages', () => {
+  const branch = JSON.parse(readFileSync(new URL('../../sinyolanda-universal/src/data/public-branches.json', import.meta.url), 'utf8')).find((branch) => branch.id === 'houston');
+  for (const file of ['houston.html', 'en/houston/index.html']) {
+    const html = readFileSync(new URL(`../${file}`, import.meta.url), 'utf8');
+    const schemas = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)];
+    assert.equal(schemas.length, 1);
+    const schema = JSON.parse(schemas[0][1]);
+    assert.equal(schema.address.streetAddress, branch.street);
+    assert.equal(schema.telephone, branch.phone.e164);
+    assert.equal(schema.hasMenu, 'https://sin-yolanda.com/houston/menu/');
+    assert.equal(schema.acceptsReservations, branch.reservation.url);
+    assert.match(html, /href="https:\/\/sin-yolanda\.com\/aviso-de-privacidad"/);
+    assert.match(html, /hreflang="es" href="https:\/\/sin-yolanda\.com\/houston"/);
+    assert.match(html, /hreflang="en" href="https:\/\/sin-yolanda\.com\/en\/houston\/"/);
+    const scripts = scriptContent(html);
+    assert.match(scripts, /sy-lang/);
+    assert.match(scripts, /reservation_click/);
+    assert.doesNotMatch(html, /menu-sy-houston\.despertartdigital\.cloud|href="\/pruebas\//);
+    assert.match(html.match(/<iframe\b[^>]+>/)[0], /loading="lazy"/);
+  }
+  assert.match(readFileSync(new URL('../sitemap.xml', import.meta.url), 'utf8'), /<loc>https:\/\/sin-yolanda\.com\/en\/houston\/<\/loc>/);
+});
+
+test('customer menu is included with all 126 offers and no review UI', () => {
+  const html = readFileSync(new URL('../houston/menu/index.html', import.meta.url), 'utf8');
+  const schema = JSON.parse(html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1]);
+  assert.equal(schema['@type'], 'Menu');
+  assert.equal(schema.hasMenuSection.flatMap(section => section.hasMenuItem).length, 126);
+  assert.match(html, /content="index,follow,max-image-preview:large"/);
+  assert.doesNotMatch(html, /Prueba local|Editorial review pending|href="\/pruebas\//);
+  assert.match(html, /href="\/houston\/"/);
+  assert.match(scriptContent(html), /reservation_click/);
+});
+
+test('packager is repeatable and refuses a branch without its explicit manifest', () => {
+  const cwd = new URL('../', import.meta.url);
+  const before = readFileSync(new URL('../index.html', import.meta.url));
+  assert.match(execFileSync(process.execPath, ['scripts/import-houston.mjs', '--dry-run'], {cwd, encoding:'utf8'}), /no changes/);
+  assert.throws(() => execFileSync(process.execPath, ['scripts/import-houston.mjs', '--branch', 'el-paso', '--dry-run'], {cwd, stdio:'pipe'}), /Command failed/);
+  assert.deepEqual(readFileSync(new URL('../index.html', import.meta.url)), before);
 });
 
 test('the official Houston page has the verified interactive map, local assets and SEO routes', () => {
