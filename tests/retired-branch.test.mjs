@@ -24,7 +24,7 @@ test('retirement is not a destructive menu rewrite', () => {
 test('every consumer requests the updated scripts rather than cached retired data', () => {
   for (const name of readdirSync(root).filter(name => name.endsWith('.html'))) {
     const html = readFileSync(new URL(name, root), 'utf8');
-    for (const [,source] of html.matchAll(/src="(assets\/js\/(?:mock-data|site)\.js[^\"]*)"/g)) {
+    for (const [,source] of html.matchAll(/src="(assets\/js\/(?:mock-data|site|i18n)\.js[^\"]*)"/g)) {
       assert.match(source, /\?v=20260930-retirement$/, name);
     }
   }
